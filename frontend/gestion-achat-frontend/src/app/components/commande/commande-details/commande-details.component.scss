@@ -1,0 +1,28 @@
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.info-section {
+  margin-bottom: 30px;
+}
+
+.info-section h3 {
+  color: #666;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+
+table {
+  width: 100%;
+}
+
+mat-card-actions {
+  padding: 16px;
+}
+
+mat-card-actions button {
+  margin-left: 8px;
+}

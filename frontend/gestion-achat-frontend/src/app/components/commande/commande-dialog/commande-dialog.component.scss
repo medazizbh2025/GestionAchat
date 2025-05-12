@@ -1,0 +1,46 @@
+.full-width {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.ligne-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.ligne-item mat-form-field {
+  flex: 1;
+}
+
+.line-total {
+  min-width: 100px;
+  text-align: right;
+  font-weight: bold;
+}
+
+mat-dialog-content {
+  min-width: 800px;
+  padding: 20px;
+  max-height: 80vh;
+}
+
+.lignes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.total {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #1976d2;
+}
+
+.action-buttons {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}

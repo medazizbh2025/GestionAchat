@@ -1,0 +1,74 @@
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Purchase Order Details</mat-card-title>
+      <mat-card-subtitle>Order #{{commande?.id}}</mat-card-subtitle>
+    </mat-card-header>
+    
+    <mat-card-content *ngIf="commande">
+      <div class="info-section">
+        <h3>Order Information</h3>
+        <p><strong>Date:</strong> {{commande.dateCommande | date}}</p>
+        <p><strong>Status:</strong> 
+          <mat-chip [color]="getStatusColor(commande.statut)" selected>
+            {{commande.statut}}
+          </mat-chip>
+        </p>
+        <p><strong>Total Amount:</strong> {{commande.montantTotal | currency:'EUR'}}</p>
+      </div>
+
+      <div class="info-section">
+        <h3>Supplier Information</h3>
+        <p><strong>Name:</strong> {{commande.fournisseur?.nom}}</p>
+        <p><strong>Address:</strong> {{commande.fournisseur?.adresse}}</p>
+        <p><strong>Phone:</strong> {{commande.fournisseur?.telephone}}</p>
+        <p><strong>Email:</strong> {{commande.fournisseur?.email}}</p>
+      </div>
+
+      <div class="info-section">
+        <h3>Order Lines</h3>
+        <table mat-table [dataSource]="commande.lignesCommande" class="mat-elevation-z2">
+          <ng-container matColumnDef="produit">
+            <th mat-header-cell *matHeaderCellDef>Product</th>
+            <td mat-cell *matCellDef="let element">{{element.produit}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="quantite">
+            <th mat-header-cell *matHeaderCellDef>Quantity</th>
+            <td mat-cell *matCellDef="let element">{{element.quantite}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="prixUnitaire">
+            <th mat-header-cell *matHeaderCellDef>Unit Price</th>
+            <td mat-cell *matCellDef="let element">{{element.prixUnitaire | currency:'EUR'}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef>Total</th>
+            <td mat-cell *matCellDef="let element">
+              {{element.quantite * element.prixUnitaire | currency:'EUR'}}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button mat-button routerLink="/commandes">
+        <mat-icon>arrow_back</mat-icon> Back to List
+      </button>
+      <button mat-raised-button color="accent" (click)="onEdit()" *ngIf="commande?.statut === 'EN_COURS'">
+        <mat-icon>edit</mat-icon> Edit
+      </button>
+      <button mat-raised-button color="warn" (click)="onCancel()" *ngIf="commande?.statut === 'EN_COURS'">
+        <mat-icon>cancel</mat-icon> Cancel Order
+      </button>
+      <button mat-raised-button color="primary" (click)="onValidate()" *ngIf="commande?.statut === 'EN_COURS'">
+        <mat-icon>check_circle</mat-icon> Validate
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
